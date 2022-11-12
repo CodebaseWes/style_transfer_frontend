@@ -21,19 +21,19 @@
       <div class="example_container">
         <div class="example" id="example_photo" style="opacity:0">
           <h2>Upload a Photo</h2>
-          <img src="/examples/example_photo.jpg" />
+          <img :src="useStore().host + '/examples/example_photo.jpg'" />
           <h2>Or Select one from the Archive</h2>
         </div>
 
         <div class="example" id="example_art" style="opacity: 0;">
           <h2>Upload an Artwork</h2>
-          <img src="/examples/example_painting.jpg" />
+          <img :src="useStore().host + '/examples/example_painting.jpg'" />
           <h2>Or Select a Monet Painting from the Archive</h2>
         </div>
 
         <div class="example" id="example_fake" style="opacity:0">
           <h2>The Style from the Artwork...</h2>
-          <img src="/examples/example_fake_painting.jpg" />
+          <img :src="useStore().host + '/examples/example_fake_painting.jpg'" />
           <h2> ...will be Transferred to the Photo</h2>
         </div>
       </div>
@@ -246,7 +246,8 @@ export default {
       }
     })()
     
-  }
+  },
+
 }
 </script>
 <style>
