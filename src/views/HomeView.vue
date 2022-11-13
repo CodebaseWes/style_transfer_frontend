@@ -42,40 +42,24 @@
 
     <div :style="step == 1 ? '' : 'display: none'">
       <ChooseImage 
+      Message="Select/Upload Photo"
       :images="photos" 
       :image_path="photo_path" 
       :max_image_size="max_image_size" 
       v-bind:image_data="photo_data"
-      v-on:update:image_data="photo_data = $event"></ChooseImage>
-
-      <div class="next_steps_buttons">
-        <button v-if="photo_data != ''" 
-          @click="step=2"
-          class="cool_button"  
-        >Choose Artwork &raquo;</button>
-
-        <button v-if="submittedBefore && photo_data != ''" 
-          @click="step=3;submit()"
-          class="cool_button button_margin"
-          >Create Masterpiece! &raquo;</button>
-      </div>
+      v-on:update:image_data="photo_data = $event; nextStep();"></ChooseImage>
     </div>
 
 
     <div :style="step == 2 ? '' : 'display: none'">
       <ChooseImage 
+      Message = "Select/Upload Artwork"
       :images="paintings" 
       :image_path="art_path" 
       :max_image_size="max_image_size" 
       v-bind:image_data="art_data"
-      v-on:update:image_data="art_data = $event"></ChooseImage>
-      
-      <div class="next_steps_buttons">
-        <button v-if="art_data != ''" 
-          @click="step=3; submittedBefore = true; submit()"
-          class="cool_button"
-        >Create Masterpiece! &raquo;</button>
-      </div>
+      v-on:update:image_data="art_data = $event; nextStep();"></ChooseImage>
+    
     </div>
 
 
@@ -126,6 +110,14 @@ export default {
     }
   },
   methods : {
+    nextStep() {
+      if (this.art_data == "") {
+        this.step = 2
+      } else {
+        this.step = 3
+        this.submit()
+      }
+    },
     async ping() {
       let response = await fetch(this.apiURL, {
           method : "POST",
@@ -257,7 +249,7 @@ export default {
   }
   
   .button_margin {
-    margin-top: 3%;
+    margin-top: 5%;
   }
 
   .next_steps_buttons {

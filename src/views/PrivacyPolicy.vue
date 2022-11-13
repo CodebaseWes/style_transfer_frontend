@@ -178,7 +178,7 @@ export default {
   color: black;
   text-align: left;
   padding: 40px;
-  padding-bottom:100px;
+  padding-bottom:200px;
 }
 
 @media only screen and (max-width: 600px) {
