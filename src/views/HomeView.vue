@@ -56,8 +56,7 @@
 
         <button v-if="submittedBefore && photo_data != ''" 
           @click="step=3;submit()"
-          class="cool_button"
-          style="margin-top: 20px;"
+          class="cool_button button_margin"
           >Create Masterpiece! &raquo;</button>
       </div>
     </div>
@@ -94,10 +93,10 @@
         <h1>Style Transfer Complete</h1>
         <canvas id="canvas" width="256" height="256"></canvas>
       </div>
-      <div style="margin-top:20%">
+      <div class="button_margin">
         <button @click="step = 1" class="cool_button" >&laquo; Change Photo</button>  
       </div>
-      <div style="margin-top:20px">
+      <div class="button_margin">
         <button @click="step = 2" class="cool_button">&laquo; Change Artwork</button>
       </div>
     </div>
@@ -254,18 +253,22 @@ export default {
 <style>
   canvas {
     border: 11px solid black;
-    margin-bottom:20px
+    margin-bottom: 1%;
+  }
+  
+  .button_margin {
+    margin-top: 1%;
   }
 
   .next_steps_buttons {
-    margin-top:50px;
+    margin-top:5%;
   }
 
   #HomeView {
     max-width: 500px;
     background: #1c171742;
     margin: auto;
-    padding: 50px;
+    padding: 5%;
     padding-top: 1px;
     height: 100%;
   }
