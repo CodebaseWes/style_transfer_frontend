@@ -7,7 +7,12 @@ body {
     margin: 0;
 }
 
-html, body {margin:0;padding:0;height:100%;}
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+  min-height:750px;
+}
 
 #app {
     text-align: center;
