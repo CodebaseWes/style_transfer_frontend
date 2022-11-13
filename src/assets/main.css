@@ -137,4 +137,14 @@ html, body {
   html, body {
     overflow: hidden;
   }
+
+  canvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .example img {
+    width: 180px;
+    height: 180px;
+  }
 }

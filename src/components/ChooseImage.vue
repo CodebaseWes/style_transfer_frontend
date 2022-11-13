@@ -117,7 +117,7 @@ export default {
     
 
     .options_separator {
-      clear:right;
+      margin-top: 1%;
     }
     .options_separator div{
       margin-top: 10px;
