@@ -2,7 +2,7 @@ body {
     background-size: 100% 100%;
     background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
     background-image: radial-gradient(18% 28% at 24% 50%, #8379F8C2 4%, #8379F8C2 10%, #073AFF00 100%),radial-gradient(18% 28% at 18% 71%, #791CC55C 6%, #073AFF00 100%),radial-gradient(42% 53% at 15% 94%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(42% 53% at 34% 72%, #A9E2E7FF 7%, #073AFF00 100%),radial-gradient(18% 28% at 35% 87%, #FFFFFFFF 7%, #073AFF00 100%),radial-gradient(31% 43% at 7% 98%, #FFFFFFFF 24%, #073AFF00 100%),radial-gradient(21% 37% at 72% 23%, #D2FC6D9C 24%, #073AFF00 100%),radial-gradient(35% 56% at 91% 74%, #44107BF5 9%, #073AFF00 100%),radial-gradient(74% 86% at 67% 38%, #C9CE29F5 24%, #073AFF00 100%),linear-gradient(125deg, #AA545AFF 1%, #4C00FCFF 100%);
-    color: white;
+    color: black;
     margin: 0;
 }
 
@@ -11,6 +11,7 @@ html, body {
   padding:0;
   height:100%;
   min-height:750px;
+  color:white;
 }
 
 #app {

@@ -257,7 +257,7 @@ export default {
   }
   
   .button_margin {
-    margin-top: 1%;
+    margin-top: 3%;
   }
 
   .next_steps_buttons {
@@ -266,7 +266,7 @@ export default {
 
   #HomeView {
     max-width: 500px;
-    background: #1c171742;
+    background: #1c1717bd;
     margin: auto;
     padding: 5%;
     padding-top: 1px;
@@ -292,7 +292,6 @@ export default {
   }
 
   .example {
-    background: #5b4242;
     position: absolute;
     width: 100%;
     padding-bottom: 15px;
