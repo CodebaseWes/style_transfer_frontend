@@ -37,7 +37,7 @@ export default {
   }
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 
 $color-pancake: #C4B26F;
 $color-pancake: #D8CB9F;
