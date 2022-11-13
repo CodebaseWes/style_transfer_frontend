@@ -31,7 +31,7 @@ defineProps({
           <button @click="prev()"  class="meh_button" style="float:left">&laquo; Prev</button>
           <button @click="next()"  class="meh_button" style="float:right">Next &raquo;</button>
         </div>
-        <canvas :id="image_path" width="256" height="256" style="clear:both"></canvas>
+        <canvas :id="image_path" width="256" height="256" style="clear:both" @click="chooseImage()"></canvas>
         <div class="file_input_container" :style="selectFromGallery == true ? 'display:none' : ''">
           <input :id="image_path + 'upload'" type="file" @change="uploadImage()" />
         </div>
