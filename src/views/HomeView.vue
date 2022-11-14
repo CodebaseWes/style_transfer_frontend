@@ -196,7 +196,6 @@ export default {
 
     (async () => {
       while (this.step == 0) {
-        console.log("here")
         photo_op = round_hund(photo_op + photo_inc)
         art_op =  round_hund( art_op + art_inc)
         fake_op = round_hund(fake_op + fake_inc)
