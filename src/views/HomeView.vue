@@ -119,15 +119,18 @@ export default {
       }
     },
     async ping() {
-      let response = await fetch(this.apiURL, {
-          method : "POST",
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({})
-      });
+      try {
+        let response = await fetch(this.apiURL, {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({})
+        });
+      } finally {
+        this.pingFinished = true        
+      }
 
-      this.pingFinished = true
     },
     async submit(prev_tries=0) {
       this.error = false
@@ -143,31 +146,36 @@ export default {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      let response = await fetch(this.apiURL, {
-          method : "POST",
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8'
-          },
-          body: JSON.stringify({
-              "photo" : this.photo_data,
-              "art" : this.art_data
-          })
-      });
+      try {
+        let response = await fetch(this.apiURL, {
+            method : "POST",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                "photo" : this.photo_data,
+                "art" : this.art_data
+            })
+        });
 
-      if (response.ok) { // if HTTP-status is 200-299
-        // get the response body (the method explained below)
-        let json = await response.json();
-        if ("styled" in json && json["styled"]) {
-          var image = new Image()
-          image.crossOrigin = 'Anonymous';
-          image.onload = () => {
-              ctx.drawImage(image, 0, 0)
+        if (response.ok) { // if HTTP-status is 200-299
+          // get the response body (the method explained below)
+          let json = await response.json();
+          if ("styled" in json && json["styled"]) {
+            var image = new Image()
+            image.crossOrigin = 'Anonymous';
+            image.onload = () => {
+                ctx.drawImage(image, 0, 0)
+            }
+            image.src ="data:image/jpeg;base64, " + json["styled"]
+            this.step = 4
+            return
           }
-          image.src ="data:image/jpeg;base64, " + json["styled"]
-          this.step = 4
-          return
         }
+      } catch(error) {
+        console.log(error)
       }
+      
       
       if (prev_tries == 0) {
         await this.submit(prev_tries+1)
