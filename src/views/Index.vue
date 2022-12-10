@@ -13,19 +13,19 @@
     <div class="example_container">
       <div class="example" :style="slide1_style">
         <h2>Upload a Photo</h2>
-        <img :src="useStore().host + '/examples/example_photo.jpg'" />
+        <img :src="store.host + '/examples/example_photo.jpg'" />
         <h2>Or Select one from the Archive</h2>
       </div>
 
       <div class="example" :style="slide2_style">
         <h2>Upload an Artwork</h2>
-        <img :src="useStore().host + '/examples/example_painting.jpg'" />
+        <img :src="store.host + '/examples/example_painting.jpg'" />
         <h2>Or Select a Monet Painting from the Archive</h2>
       </div>
 
       <div class="example" id="example_fake" :style="slide3_style">
         <h2>The Style from the Artwork...</h2>
-        <img :src="useStore().host + '/examples/example_fake_painting.jpg'" />
+        <img :src="store.host + '/examples/example_fake_painting.jpg'" />
         <h2> ...will be Transferred to the Photo</h2>
       </div>
     </div>
@@ -41,7 +41,7 @@ export default {
             slide3_style : {opacity : 0},
             animTime : 8000,
             active : true,
-            store : this.useStore
+            store : useStore()
         }
     },
     methods: {
