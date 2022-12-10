@@ -5,7 +5,7 @@ import { useStore } from './stores/store'
 </script>
 
 <template>
-  <div :id="useStore().contentDOMID" ref="content_wrapper">
+  <div :id="store.contentDOMID" ref="content_wrapper">
     <RouterView />
   </div>
   <footer>
@@ -23,14 +23,15 @@ import { useStore } from './stores/store'
 export default {
   data() {
     return {
-      contentID : "Content"
+      contentID : "Content",
+      store: useStore()
     }
   },
   created() {
     /* If user reloads the page, the Vue store state is lost. Therefore, lets
     redirect the user to the home page
     */
-    if (this.useStore().pageVisited == false && this.$route.name != "Index") {
+    if (this.store.pageVisited == false && this.$route.name != "Index") {
       this.$router.push("/")
     }
   }, 

@@ -166,7 +166,8 @@ import { useStore } from '../stores/store'
 export default {
   data() {
     return {
-        SiteName : "RoboArtist"
+        SiteName : "RoboArtist",
+        store : useStore()
     }
   },
   computed: {
@@ -175,10 +176,10 @@ export default {
     }
   },
   mounted() {
-    this.useStore().contentDOMID = ""
+    this.store.contentDOMID = ""
   },
   unmounted() {
-    this.useStore().contentDOMID = "Content"
+    this.store.contentDOMID = "Content"
   }
 }
 </script>

@@ -56,7 +56,7 @@ export default {
         I could have used Lambda Provisioned concurrency for this, but I don't want to pay $11 */
         async ping() {
             try {
-                let response = await fetch(this.useStore().apiURL, {
+                let response = await fetch(this.store.apiURL, {
                     method : "POST",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
