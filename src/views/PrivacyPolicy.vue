@@ -1,8 +1,10 @@
-
+<script setup>
+import { useStore } from '../stores/store'
+</script>
 <template>
   <div id="PrivacyContainer">
     <div  id="Privacy">
-      <button class="meh_button" @click="$router.push('/')">Back</button>
+      <button class="meh_button" @click="$router.go(-1)">Back</button>
       <h1>Privacy Policy for {{SiteName}}</h1>
 
       <p>At {{SiteName}}, accessible from {{url}}, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by {{SiteName}} and how we use it.</p>
@@ -169,6 +171,12 @@ export default {
     url() {
         return window.location.hostname 
     }
+  },
+  mounted() {
+    this.useStore().contentDOMID = ""
+  },
+  unmounted() {
+    this.useStore().contentDOMID = "Content"
   }
 }
 </script>

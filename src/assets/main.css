@@ -110,6 +110,50 @@ html, body {
   touch-action: manipulation;
 }
 
+canvas {
+  border: 11px solid black;
+  margin-bottom: 1%;
+}
+
+.button_margin {
+  margin-top: 5%;
+}
+.next_steps_buttons {
+  margin-top:5%;
+}
+#HomeView {
+  max-width: 500px;
+  background: #1c1717bd;
+  margin: auto;
+  padding: 5%;
+  padding-top: 1px;
+  height: 100%;
+}
+#LoadingBlur {
+  width: 100%;
+  background: #1c171742;
+  margin: auto;
+  height: 1000px;
+  padding:1px;
+}
+h2 {
+  margin: 8px;
+}
+.example_container {
+  margin-top: 20px;
+  position: relative;
+  height:450px;
+}
+.example {
+  position: absolute;
+  width: 100%;
+  padding-bottom: 15px;
+}
+.example img {
+  border-radius: 10px;
+}
+
+
 @media only screen and (max-width: 600px) {
   h1 {
     font-size:20px

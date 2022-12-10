@@ -5,10 +5,12 @@ import { useStore } from './stores/store'
 </script>
 
 <template>
-  <RouterView />
+  <div :id="useStore().contentDOMID" ref="content_wrapper">
+    <RouterView />
+  </div>
   <footer>
     <div id="privacy">
-      <button class="meh_button" @click="$router.push('privacy')">Privacy Policy</button>
+      <button class="meh_button" @click="$router.push('/privacy')">Privacy Policy</button>
     </div>
     <div id="linkedin">
       <a href="https://www.linkedin.com/in/wesley-f-6379251b7" target="_blank">
@@ -20,13 +22,40 @@ import { useStore } from './stores/store'
 <script>
 export default {
   data() {
-    return {}
+    return {
+      contentID : "Content"
+    }
   },
-  mounted() {
-  }
+  created() {
+    /* If user reloads the page, the Vue store state is lost. Therefore, lets
+    redirect the user to the home page
+    */
+    if (this.useStore().pageVisited == false && this.$route.name != "Index") {
+      this.$router.push("/")
+    }
+  }, 
 }
 </script>
 <style scoped>
+
+  #Content {
+    max-width: 500px;
+    background: #1c1717bd;
+    margin: auto;
+    padding: 5%;
+    padding-top: 1px;
+    height: 100%;
+  }
+
+  #LoadingBlur {
+    width: 100%;
+    background: #1c171742;
+    margin: auto;
+    height: 1000px;
+    padding:1px;
+  }
+
+
 
   #linkedin {
     position: fixed;

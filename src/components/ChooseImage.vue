@@ -7,6 +7,9 @@ defineProps({
   max_image_size: {
     type: Number,
     required: true
+  },
+  fromGallery: {
+    required: true
   }, 
   images: {
     type: Array,
@@ -31,9 +34,9 @@ defineProps({
           <button @click="prev()"  class="meh_button" style="float:left">&laquo; Prev</button>
           <button @click="next()"  class="meh_button" style="float:right">Next &raquo;</button>
         </div>
-        <canvas :id="image_path" width="256" height="256" style="clear:both"></canvas>
+        <canvas ref="canvas" width="256" height="256" style="clear:both"></canvas>
         <div class="file_input_container" :style="selectFromGallery == true ? 'display:none' : ''">
-          <input :id="image_path + 'upload'" type="file" @change="uploadImage()" />
+          <input ref="upload" type="file" @change="uploadImage()" />
         </div>
       </div>
       <div class="button_margin" v-if="data != ''">
@@ -74,16 +77,17 @@ defineProps({
 <script>
 export default {
   name: 'ChooseImage',
+  emits : ["selectionUpdate", "image_chosen"],
   data() {
     return {
       image_index : Math.floor(Math.random() * this.images.length),
-      selectFromGallery : null,
-      data : ""
+      data : this.image_data,
+      selectFromGallery : this.fromGallery
     }
   },
   methods : {
     uploadImage() {
-      let elem = document.getElementById(this.image_path + "upload")
+      let elem = this.$refs.upload
       
       if (elem.files.length == 0) {
         return
@@ -105,7 +109,7 @@ export default {
       this.populateWithIndex()
     },
     populate(src) {
-      let canvas = document.getElementById(this.image_path)
+      let canvas = this.$refs.canvas
       let ctx = canvas.getContext('2d')
 
       var image = new Image()
@@ -127,21 +131,37 @@ export default {
     },
     populateWithIndex() {
       this.selectFromGallery = true
+      this.$emit("selectionUpdate", this.selectFromGallery)
       this.populate(this.image_path + this.images[this.image_index])
     },
     clearCanvas() {
       this.selectFromGallery=false;
-      let canvas = document.getElementById(this.image_path)
+      this.$emit("selectionUpdate", this.selectFromGallery)
+      let canvas = this.$refs.canvas
       let ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       this.uploadImage()
     }, 
     chooseImage() {
-      this.$emit('update:image_data', this.data)
+      this.$emit('image_chosen', this.data)
     }
   },
 
   mounted() {
+    if (this.data == "") {
+      this.selectFromGallery = null
+      this.$emit("selectionUpdate", this.selectFromGallery)
+      return
+    }
+
+    let canvas = this.$refs.canvas
+    let ctx = canvas.getContext('2d')
+
+    var image = new Image()
+    image.onload = () => {
+      ctx.drawImage(image, 0, 0, 256, 256)
+    }
+    image.src = "data:image/jpeg;base64," + this.data
   }
 }
 </script>
