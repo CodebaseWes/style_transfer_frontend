@@ -108,6 +108,7 @@ export default {
       this.image_index = (this.image_index - 1 + this.images.length) % this.images.length
       this.populateWithIndex()
     },
+    /* Given a web url or a data url, draw the image to a canvas */
     populate(src) {
       let canvas = this.$refs.canvas
       let ctx = canvas.getContext('2d')
@@ -129,6 +130,7 @@ export default {
         this.data = result
       }
     },
+    /* Draw the image that the user has selected from the gallery */
     populateWithIndex() {
       this.selectFromGallery = true
       this.$emit("selectionUpdate", this.selectFromGallery)
@@ -136,24 +138,33 @@ export default {
     },
     clearCanvas() {
       this.selectFromGallery=false;
+      /*Reset the data variable. This prevents the user from continuing with a blank image.
+      If an image is not uploaded, the parent should have a copy of the last chosen image 
+      and will use that one*/
+      this.data = "";
+
       this.$emit("selectionUpdate", this.selectFromGallery)
       let canvas = this.$refs.canvas
       let ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       this.uploadImage()
     }, 
+    /*Tell the parent that a user has chosen an image */
     chooseImage() {
       this.$emit('image_chosen', this.data)
     }
   },
-
   mounted() {
+    /* If an image has not been chosen/uploaded, make sure that
+    to reset the the flag that tells the app which choice the user made (select from gallery or upload) */
     if (this.data == "") {
       this.selectFromGallery = null
       this.$emit("selectionUpdate", this.selectFromGallery)
       return
     }
 
+    /*I the user had previously chosen an image, show it.
+    The Vue app temporarily remembers what images users had chosen/uploaded. */
     let canvas = this.$refs.canvas
     let ctx = canvas.getContext('2d')
 

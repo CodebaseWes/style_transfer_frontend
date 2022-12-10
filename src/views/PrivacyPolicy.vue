@@ -1,5 +1,7 @@
 <script setup>
 import { useStore } from '../stores/store'
+
+//Please don't sue me!!!
 </script>
 <template>
   <div id="PrivacyContainer">

@@ -49,6 +49,11 @@ export default {
             this.ping()
             this.$router.push("/selection/photo")
         },
+        /*Deep learning models are notoriously slow, especially if they do not 
+        have GPU hardware on which to run. The Lambda function on the back-end takes 
+        a while to get initialized, but is reasonably fast once dependencies have been cached.
+        This function pings the API to wake up while the web user is choosing images to upload. 
+        I could have used Lambda Provisioned concurrency for this, but I don't want to pay $11 */
         async ping() {
             try {
                 let response = await fetch(this.useStore().apiURL, {
@@ -65,9 +70,10 @@ export default {
         },
 
     },
+    /* When the DOM has rendered, start up a slideshow animation.*/
     mounted() {
-        this.store.pingFinished = false
-        this.store.pageVisited = true
+        this.store.pingFinished = false //reset the ping flag
+        this.store.pageVisited = true //this helps with redirect on page refresh
 
 
         let slide1_inc = -0.01
@@ -78,6 +84,7 @@ export default {
         const round_hund = num => Math.round(num * 100) / 100;
 
         (async () => {
+            /* While on this page, show the animation*/
             while (this.active) {
                 this.slide1_style.opacity = round_hund(this.slide1_style.opacity + slide1_inc)
                 this.slide2_style.opacity =  round_hund(this.slide2_style.opacity + slide2_inc)
@@ -114,6 +121,7 @@ export default {
         })()
     },
     unmounted() {
+        //Stop the animation when the user leaves the page
         this.active = false
     }
 }
