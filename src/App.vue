@@ -56,6 +56,9 @@ export default {
     padding:1px;
   }
 
+  #MaxHeight {
+    height: 100%;
+  }
 
 
   #linkedin {

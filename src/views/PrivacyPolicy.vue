@@ -176,7 +176,7 @@ export default {
     }
   },
   mounted() {
-    this.store.contentDOMID = ""
+    this.store.contentDOMID = "MaxHeight"
   },
   unmounted() {
     this.store.contentDOMID = "Content"
