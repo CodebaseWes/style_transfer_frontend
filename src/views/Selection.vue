@@ -2,32 +2,35 @@
   import { useStore } from '../stores/store'
   import ChooseImage from '../components/ChooseImage.vue'
   import Loading from '../components/Loading.vue'
+  import MiddleArea from '../components/MiddleArea.vue'
 
 </script>
 <template>
-    <ChooseImage 
-        v-if="step == 1"
-        Message="Select/Upload Photo"
-        :fromGallery="store.wasPhotoUploadSelected"
-        @selectionUpdate="store.wasPhotoUploadSelected = $event"
-        :images="photos" 
-        :image_path="photo_path" 
-        :max_image_size="max_image_size" 
-        :image_data="store.photo_data"
-        @image_chosen="store.photo_data = $event; $router.push('/selection/art');"></ChooseImage>
+    <MiddleArea :loading="step == 3">
+        <ChooseImage 
+            v-if="step == 1"
+            Message="Select/Upload Photo"
+            :fromGallery="store.wasPhotoUploadSelected"
+            @selectionUpdate="store.wasPhotoUploadSelected = $event"
+            :images="photos" 
+            :image_path="photo_path" 
+            :max_image_size="max_image_size" 
+            :image_data="store.photo_data"
+            @image_chosen="store.photo_data = $event; $router.push('/selection/art');"></ChooseImage>
 
-    <ChooseImage 
-        v-else-if="step == 2"
-        Message = "Select/Upload Artwork"
-        :fromGallery="store.wasArtUploadSelected"
-        @selectionUpdate="store.wasArtUploadSelected = $event"
-        :images="paintings" 
-        :image_path="art_path" 
-        :max_image_size="max_image_size" 
-        :image_data="store.art_data"
-        @image_chosen="store.art_data = $event; submit()"></ChooseImage>
+        <ChooseImage 
+            v-else-if="step == 2"
+            Message = "Select/Upload Artwork"
+            :fromGallery="store.wasArtUploadSelected"
+            @selectionUpdate="store.wasArtUploadSelected = $event"
+            :images="paintings" 
+            :image_path="art_path" 
+            :max_image_size="max_image_size" 
+            :image_data="store.art_data"
+            @image_chosen="store.art_data = $event; submit()"></ChooseImage>
 
-    <Loading v-else></Loading>
+        <Loading v-else></Loading>
+    </MiddleArea>
 
 </template>
 <script>
@@ -51,7 +54,6 @@ export default {
         async submit(prev_tries=0) {
             this.step = 3 //Show loading component
             this.error = false
-            this.store.contentDOMID = "LoadingBlur" //change the base layout while loading
 
             const waitFor = delay => new Promise(resolve => setTimeout(resolve, delay));
 
@@ -77,7 +79,6 @@ export default {
                     let json = await response.json();
                     if ("styled" in json && json["styled"]) {
                         this.store.masterpiece = json["styled"]
-                        this.store.contentDOMID = "Content"
                         this.$router.push("/artwork")
                         return
                     }
@@ -93,7 +94,6 @@ export default {
                 this.error = true
             }
 
-            this.store.contentDOMID = "Content"
             this.$router.push("/error")
         }, 
         /* Show either the select photo form or the select art form*/

@@ -1,11 +1,10 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import ChooseImage from './components/ChooseImage.vue'
 import { useStore } from './stores/store'
 </script>
 
 <template>
-  <div :id="store.contentDOMID" ref="content_wrapper">
+  <div id="Content">
     <RouterView />
   </div>
   <footer>
@@ -40,26 +39,8 @@ export default {
 <style scoped>
 
   #Content {
-    max-width: 500px;
-    background: #1c1717bd;
-    margin: auto;
-    padding: 5%;
-    padding-top: 1px;
     height: 100%;
   }
-
-  #LoadingBlur {
-    width: 100%;
-    background: #1c171742;
-    margin: auto;
-    height: 1000px;
-    padding:1px;
-  }
-
-  #MaxHeight {
-    height: 100%;
-  }
-
 
   #linkedin {
     position: fixed;

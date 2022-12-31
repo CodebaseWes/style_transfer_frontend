@@ -6,7 +6,6 @@ export const useStore = defineStore('store', {
     return {
       host : window.location.origin + (process.env.NODE_ENV == 'development' ? '/public' : ''),
       pageVisited : false,
-      contentDOMID : "Content",
       masterpiece: "",
       wasPhotoUploadSelected : null,
       wasArtUploadSelected : null,

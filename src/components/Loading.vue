@@ -20,8 +20,6 @@
             </div>
         </div>
     </div>
-
-    <footer class="footer"></footer>
 </template>
 <script>
 export default {

@@ -1,8 +1,3 @@
-<script setup>
-import { useStore } from '../stores/store'
-
-//Please don't sue me!!!
-</script>
 <template>
   <div id="PrivacyContainer">
     <div  id="Privacy">
@@ -167,19 +162,12 @@ export default {
   data() {
     return {
         SiteName : "RoboArtist",
-        store : useStore()
     }
   },
   computed: {
     url() {
         return window.location.hostname 
     }
-  },
-  mounted() {
-    this.store.contentDOMID = "MaxHeight"
-  },
-  unmounted() {
-    this.store.contentDOMID = "Content"
   }
 }
 </script>
