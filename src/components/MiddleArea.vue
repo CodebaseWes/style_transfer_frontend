@@ -22,7 +22,7 @@ export default {
 
   #MiddleArea.loading {
     max-width: 100%;
-    padding: none;
+    padding-bottom: 0%;
   }
 
 </style>
